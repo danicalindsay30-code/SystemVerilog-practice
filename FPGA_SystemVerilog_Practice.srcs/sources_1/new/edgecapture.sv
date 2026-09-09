@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 09.09.2026 16:57:17
+// Create Date: 09.09.2026 17:51:22
 // Design Name: 
-// Module Name: exam5
+// Module Name: edgecapture
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module exam5(
+module edgecapture(
 
     );
 endmodule

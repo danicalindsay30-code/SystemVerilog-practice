@@ -14,7 +14,7 @@ module exam4( input logic clk, x,
 
           assign d[0] = x ^ q[0];
           assign d[1] = x & ~q[1];
-          assign d[2] = x | ~q[2]; 
+          assign d[2] = x | ~dq[2]; 
           
           //output logic 
           nor(z, q[0],q[1],q[2]);
