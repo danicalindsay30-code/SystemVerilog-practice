@@ -13,15 +13,16 @@ endmodule
 
 module bcd_count(input logic clk,
                  input logic reset,
-                 input logic [1:0]enable,
+                 input logic ena,
                  output logic [7:0] Q);
-     
+      
        //internal wires
        logic [3:0] q_ones, q_tens;
+       logic [1:0] enable;
                  
        always_comb begin 
-       enable[0] = 2'b1;
-       enable[1] = (q_ones == 4'd9);
+       enable[0] = ena;
+       enable[1] = ena && (q_ones == 4'd9);
    
        end 
        
@@ -29,6 +30,8 @@ module bcd_count(input logic clk,
        //istantiate the counters 
        count10 ones_count (clk, reset, enable[0], q_ones);
        count10 tens_count (clk, reset, enable[1], q_tens);
+       
+       assign Q = {q_tens, q_ones};
                  
       
 endmodule
@@ -49,7 +52,7 @@ module count10 (input logic clk,
               count <= '0;
           end 
           else begin
-             count <= count + 1'b0;
+             count <= count + 1'b1;
           end 
        
        end 
