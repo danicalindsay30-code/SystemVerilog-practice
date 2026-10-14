@@ -41,9 +41,6 @@ initial begin
    //wait 
    @(negedge clk_tb)
    reset_tb = 1'b1;
-   
-  
-
 
 end
        
