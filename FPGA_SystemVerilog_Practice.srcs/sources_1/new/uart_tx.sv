@@ -25,3 +25,19 @@ module uart_tx #(
         DATA_BITS,
         STOP_BIT
     } state_t;
+tate_t state;
+
+    logic [7:0] data_reg;
+    logic [2:0] bit_index;
+    logic [TIMER_WIDTH-1:0] clock_count;
+
+    always_ff @(posedge clk) begin
+        if (reset) begin
+            state       <= IDLE;
+            data_reg    <= 8'b0;
+            bit_index   <= 3'b0;
+            clock_count <= '0;
+            tx          <= 1'b1;
+            busy        <= 1'b0;
+            tx_done     <= 1'b0;
+        end else begin
