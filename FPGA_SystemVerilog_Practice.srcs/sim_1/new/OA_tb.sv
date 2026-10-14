@@ -30,10 +30,18 @@ initial begin
    //wait until the first rising edhe 
    
    //test invalid input 
-   @(negedge clk_tb);
+   @(negedge clk_tb)
    reset_tb = 1'b0;  in_valid_tb = 0;
    
    @(posedge clk_tb)
+   //wait 
+   @(negedge clk_tb)
+   in_data_tb = 32'h19024F5D;
+   @(posedge clk_tb )
+   //wait 
+   @(negedge clk_tb)
+   reset_tb = 1'b1;
+   
   
 
 
