@@ -22,26 +22,53 @@ end
 //generate input stimuli 
 
 initial begin
-   reset_tb = 1'b1;
-   in_valid_tb = 1'b0;
-   in_data_tb = 32'b0;
-   
-   @(posedge clk_tb)
-   //wait until the first rising edhe 
-   
-   //test invalid input 
-   @(negedge clk_tb)
-   reset_tb = 1'b0;  in_valid_tb = 0;
-   
-   @(posedge clk_tb)
-   //wait 
-   @(negedge clk_tb)
-   in_data_tb = 32'h19024F5D;
-   @(posedge clk_tb )
-   //wait 
-   @(negedge clk_tb)
-   reset_tb = 1'b1;
+    // Initialise inputs
+    reset_tb    = 1'b1;
+    in_valid_tb = 1'b0;
+    in_data_tb  = 32'b0;
 
+    // Test 1: Assert reset
+    repeat (2) @(posedge clk_tb);
+
+    // Test 2: Deassert reset, invalid input
+    @(negedge clk_tb);
+    reset_tb = 1'b0;
+    in_valid_tb = 1'b0;
+
+    @(posedge clk_tb);
+    #1;
+
+    // Test 3: Valid input, wrong data
+    @(negedge clk_tb);
+    in_valid_tb = 1'b1;
+    in_data_tb = 32'h12345678;
+
+    @(posedge clk_tb);
+    #1;
+
+    // Test 4: Valid input, matching data
+    @(negedge clk_tb);
+    in_valid_tb = 1'b1;
+    in_data_tb = 32'h19024F5D;
+
+    @(posedge clk_tb);
+    #1;
+
+    // Test 5: Deassert valid
+    @(negedge clk_tb);
+    in_valid_tb = 1'b0;
+
+    @(posedge clk_tb);
+    #1;
+
+    // Test 6: Assert reset again
+    @(negedge clk_tb);
+    reset_tb = 1'b1;
+
+    @(posedge clk_tb);
+    #1;
+
+    $finish;
 end
        
 endmodule
