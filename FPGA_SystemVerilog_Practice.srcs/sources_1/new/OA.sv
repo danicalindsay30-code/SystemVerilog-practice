@@ -21,10 +21,13 @@ module OA (
     
     always_ff @(posedge clk) begin 
     if (reset) begin 
-    out_valid <= '0;
-    out_trigger <= '0;
-    
+       out_valid <= '0;
+       out_trigger <= '0;
     end
+    else begin 
+       out_valid <= (in_valid);
+       out_trigger <= (in_valid && (in_data == 32'h19024F5D));
+    end 
     
     end 
 endmodule
